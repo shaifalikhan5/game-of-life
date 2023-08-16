@@ -21,13 +21,7 @@ pipeline {
            sh script: 'mvn clean package'
             }
         }
-        stage('reporting') {
-            steps {
-              archiveArtifacts artifacts : '**/*.war'
-              junit testResults : '**/surefire-reports/*.xml'
-
-            }
-        }
+        
     }
 
 }
