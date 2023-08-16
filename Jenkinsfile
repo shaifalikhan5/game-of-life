@@ -1,34 +1,33 @@
 pipeline {
- agent any
-  options {
-        timeout(time: 1, unit: 'HOURS') 
+    agent any
+    options {
+        timeout(time: 30, unit: 'MINUTES')
     }
-    triggers { pollSCM('* * * * *') }
+    triggers {
+        pollSCM('* * * * *')
+    }
     tools {
-        maven 'maven3.9'
+        jdk 'JDK_17'
     }
     stages {
-        stage('git clone stage') {
+        stage('vcs') {
             steps {
                 git url: 'https://github.com/shaifalikhan5/game-of-life.git',
-                 branch: 'master'
+                branch: 'master'
             }
         }
-            stage('build stage') {
-                steps {
-                    sh script: 'mvn clean package'
-
-                }
-                stage('artifacts') {
-                    steps {
-                        archiveArtifacts artifacts: '**/target/*.jar'
-                        junit testResults : '**/target/*.xml'
-                    }
-                }
+        stage('build and package') {
+            steps {
+           sh scripts: 'mvn package'
             }
+        }
+        stage('reporting') {
+            steps {
+              archiveArtifacts artifacts : '**/target/*.jar'
+              junit testResults : '**/surefire-reports/*.xml'
 
+            }
         }
     }
-
 
 }
