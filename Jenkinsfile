@@ -7,7 +7,7 @@ pipeline {
         pollSCM('* * * * *')
     }
     tools {
-        jdk 'JDK_17'
+        jdk 'openjdk 17.0.8 2023-07-18'
     }
     stages {
         stage('vcs') {
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('build and package') {
             steps {
-           sh scripts: 'mvn package'
+           sh script: 'mvn package'
             }
         }
         stage('reporting') {
