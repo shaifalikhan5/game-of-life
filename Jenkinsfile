@@ -23,8 +23,10 @@ pipeline {
             }
         }
         stage('artifact and test') {
-            archiveArtifacts  artifacts: '**/target/*.war'
+          steps {
+             archiveArtifacts  artifacts: '**/target/*.war'
             junit testResults : '**/surefire-reports/*.xml'
+          }
 
         }
         
