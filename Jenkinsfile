@@ -22,6 +22,11 @@ pipeline {
            sh script: 'mvn clean package'
             }
         }
+        stage('artifact and test') {
+            archiveArtifacts  artifacts: '**/target/*.war'
+            junit testResults : '**/surefire-reports/*.xml'
+
+        }
         
     }
 
