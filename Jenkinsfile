@@ -13,6 +13,7 @@ pipeline {
                 git url: 'https://github.com/shaifalikhan5/game-of-life.git',
                  branch: 'master'
             }
+        }
             stage('build stage') {
                 steps {
                     sh script: 'mvn clean package'
