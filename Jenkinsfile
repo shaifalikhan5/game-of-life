@@ -7,7 +7,7 @@ pipeline {
         pollSCM('* * * * *')
     }
     tools {
-        jdk 'openjdk 17.0.8 2023-07-18'
+        maven 'maven3.9'
     }
     stages {
         stage('vcs') {
