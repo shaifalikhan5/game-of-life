@@ -8,7 +8,7 @@ pipeline {
         maven 'maven3.9'
     }
     stages {
-        stage(' git clone stage') {
+        stage('git clone stage') {
             steps {
                 git url: 'https://github.com/shaifalikhan5/game-of-life.git',
                  branch: 'master'
