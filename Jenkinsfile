@@ -18,7 +18,7 @@ pipeline {
         }
         stage('build and package') {
             steps {
-           sh script: 'mvn package'
+           sh script: 'mvn clean package'
             }
         }
         stage('reporting') {
