@@ -8,6 +8,7 @@ pipeline {
     }
     tools {
         maven 'maven3.9'
+        jdk 'jdk-8'
     }
     stages {
         stage('vcs') {
