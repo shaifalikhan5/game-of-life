@@ -23,7 +23,7 @@ pipeline {
         }
         stage('reporting') {
             steps {
-              archiveArtifacts artifacts : '**/target/*.war'
+              archiveArtifacts artifacts : '**/*.war'
               junit testResults : '**/surefire-reports/*.xml'
 
             }
