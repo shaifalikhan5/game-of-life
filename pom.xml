@@ -6,8 +6,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>gameoflife</name>
-    <url>https://github.com/wakaleo/game-of-life</url>
     <properties>
+        <sonar.host.url>http://3.6.160.44:9000/</sonar.host.url>
+        <sonar.login>2e1d346de2dc3e4145b6467e9e0259eb75bc62d8</sonar.login>
         <build.number>SNAPSHOT</build.number>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <easyb.version>1.4</easyb.version>
