@@ -19,9 +19,6 @@
         <thucydides.version>1.8.4</thucydides.version>
         <jelastic.context>gameoflife</jelastic.context>
         <jelastic.environment>wakaleo</jelastic.environment>
-         <sonar.host.url>http://65.1.112.63:9000/</sonar.host.url>
-        <sonar.login>admin</sonar.login>
-        <sonar.password>12345</sonar.password>
     </properties>
 
     <scm>
@@ -149,12 +146,7 @@
         </plugins>
 
         <pluginManagement>
-   
             <plugins>
-                            <plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <version>3.0.2</version>
-</plugin>
                 <plugin>
                     <groupId>org.easyb</groupId>
                     <artifactId>maven-easyb-plugin</artifactId>
