@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PATH="$PATH:/opt/maven/bin"
+    }
     options {
         timeout(time: 30, unit: 'MINUTES')
     }
@@ -13,11 +16,15 @@ pipeline {
     stages {
         stage('vcs') {
             steps {
-                git url: 'https://github.com/shaifalikhan5/game-of-life.git',
+                git url: 'ls',
                 branch: 'master'
             }
         }
         stage('build and package') {
+            environment {
+                JAVA_HOME = tool 'jdk8'
+                PATH="${env.JAVA_HOME}/bin/java:${env.PATH}"
+            }
             steps {
            sh script: 'mvn clean package'
             }
