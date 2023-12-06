@@ -16,7 +16,7 @@ pipeline {
         PATH = "${env.JAVA_HOME}/bin/java:${env.PATH}"
         }
             steps{
-                sh 'mvn clean package'
+                sh 'mvn -v'
             }
             }
      stage('archeve artifacts') {
