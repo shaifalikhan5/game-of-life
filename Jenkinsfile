@@ -1,42 +1,37 @@
 pipeline {
-    agent any
+    agent { label 'worker1' }
+    triggers { pollSCM('* * * * *') }
     environment {
-        PATH="$PATH:/opt/maven/bin"
+        PATH="$PATH:/opt/maven3.9/bin"
     }
-    options {
-        timeout(time: 30, unit: 'MINUTES')
-    }
-    triggers {
-        pollSCM('* * * * *')
-    }
-    tools {
-        maven 'maven3.9'
-        jdk 'jdk-8'
-    }
-    stages {
-        stage('vcs') {
-            steps {
-                git url: 'ls',
-                branch: 'master'
+    stages{
+        stage('git version') {
+            steps{
+                git url: 'https://github.com/shaifalikhan5/game-of-life.git',branch: 'master'
             }
         }
-        stage('build and package') {
-            environment {
-                JAVA_HOME = tool 'jdk8'
-                PATH="${env.JAVA_HOME}/bin/java:${env.PATH}"
+     stage('build_stage') {
+        JAVA_HOME = tool 'jdk17'
+        PATH = "${env.JAVA_HOME}/bin/java:${env.PATH}"
+            steps{
+                sh 'mvn clean package'
             }
-            steps {
-           sh script: 'mvn clean package'
+            }
+     stage('archeve_artifacts') {
+            steps{
+              archiveArtifacts artifacts: '**/target/*.jar'
+              junit testResults : '**/target/surefire-reports/*.xml'   
+            }
+            }
+     stage('sonarqube_integration') {
+            steps{
+                sh 'mvn -v'
             }
         }
-        stage('artifact and test') {
-          steps {
-             archiveArtifacts  artifacts: '**/target/*.war'
-            junit testResults : '**/surefire-reports/*.xml'
-          }
-
-        }
-        
+    stage('upload artifacts') {
+            steps{
+                sh 'mvn -v'
+            }
+        }     
     }
-
 }
