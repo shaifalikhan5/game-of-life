@@ -12,7 +12,7 @@ pipeline {
         }
      stage('build stage') {
         environment {
-        JAVA_HOME = tool 'jdk17'
+        JAVA_HOME = tool 'jdk8'
         PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
         }
             steps{
