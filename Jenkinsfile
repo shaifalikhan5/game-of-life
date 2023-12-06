@@ -7,7 +7,7 @@ pipeline {
     stages{
         stage('git version') {
             steps{
-                git url: 'https://github.com/shaifalikhan5/game-of-life.git',branch: 'master'
+                git url: 'https://github.com/shaifalikhan5/game-of-life.git',
             }
         }
      stage('build stage') {
