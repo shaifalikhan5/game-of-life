@@ -10,14 +10,14 @@ pipeline {
                 git url: 'https://github.com/shaifalikhan5/game-of-life.git',branch: 'master'
             }
         }
-     stage('build_stage') {
+     stage('build stage') {
         JAVA_HOME = tool 'jdk17'
         PATH = "${env.JAVA_HOME}/bin/java:${env.PATH}"
             steps{
                 sh 'mvn clean package'
             }
             }
-     stage('archeve_artifacts') {
+     stage('archeve artifacts') {
             steps{
               archiveArtifacts artifacts: '**/target/*.jar'
               junit testResults : '**/target/surefire-reports/*.xml'   
