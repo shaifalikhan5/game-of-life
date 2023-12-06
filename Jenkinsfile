@@ -11,8 +11,10 @@ pipeline {
             }
         }
      stage('build stage') {
+        environment {
         JAVA_HOME = tool 'jdk17'
         PATH = "${env.JAVA_HOME}/bin/java:${env.PATH}"
+        }
             steps{
                 sh 'mvn clean package'
             }
