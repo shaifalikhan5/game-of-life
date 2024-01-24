@@ -13,5 +13,5 @@ jobs:
   - script: |
       echo "Using Java version:"
       java -version
-      mvn clean package
+      mvn package
     displayName: 'Build with Java 8'
