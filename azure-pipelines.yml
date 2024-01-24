@@ -1,1 +1,17 @@
-ww
+trigger:
+  - master
+
+jobs:
+- job: build_with_java_8
+  displayName: 'Build with Java 8'
+  pool:
+    name: default 
+  variables:
+    JAVA_HOME: '/usr/lib/jvm/java-8-openjdk-amd64'
+    PATH: '$(JAVA_HOME)/bin:$(PATH)'
+  steps:
+  - script: |
+      echo "Using Java version:"
+      java -version
+      mvn clean package
+    displayName: 'Build with Java 8'
