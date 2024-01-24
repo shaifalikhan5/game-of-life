@@ -10,8 +10,10 @@ jobs:
     JAVA_HOME: '/usr/lib/jvm/java-8-openjdk-amd64'
     PATH: '$(JAVA_HOME)/bin:$(PATH)'
   steps:
-  - script: |
-      echo "Using Java version:"
-      java -version
-      mvn package
-    displayName: 'Build with Java 8'
+    - task: Maven@3
+      inputs:
+        mavenPOMFile: 'pom.xml'
+        goals: 'package'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+ 
