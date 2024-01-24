@@ -11,4 +11,4 @@ jobs:
     MAVEN_HOME: '/usr/share/maven'
     PATH: '$(JAVA_HOME)/bin:$(MAVEN_HOME)/bin:$(PATH)'
   steps:
-    - bash: java -version
+    - bash: '$(PATH)/java -version'
