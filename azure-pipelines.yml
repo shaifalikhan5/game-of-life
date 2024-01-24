@@ -15,7 +15,7 @@ jobs:
   steps:
   - script: |
       sudo apt-get install maven
-    displayName: 'Install Maven'
+      displayName: 'Install Maven'
 
   - task: Maven@3
     inputs:
