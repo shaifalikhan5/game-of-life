@@ -1,7 +1,9 @@
 trigger:
 - master
+
 pool:
-    name: default 
+  name: default
+
 jobs:
 - job: build_with_java_8
   displayName: 'Build with Java 8'
@@ -9,12 +11,18 @@ jobs:
     JAVA_HOME: '/usr/lib/jvm/java-8-openjdk-amd64'
     MAVEN_HOME: '/usr/share/maven'
     PATH: '$(JAVA_HOME)/bin:$(MAVEN_HOME)/bin:$(Agent.ToolsDirectory)/bin:$(PATH)'
+
   steps:
-  - task:
-    - script: |
-        sudo apt-get install maven
-        displayName: 'Install Maven'
-  - task: maven@3
+  - task: UseJavaVersion@0
+    inputs:
+      versionSpec: '8'
+      addToPath: true
+
+  - script: |
+      sudo apt-get install maven
+    displayName: 'Install Maven'
+
+  - task: Maven@3
     inputs:
       mavenPOMFile: 'pom.xml'
       goals: 'package'
