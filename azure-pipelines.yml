@@ -1,11 +1,10 @@
 trigger:
 - master
-
+pool:
+    name: default 
 jobs:
 - job: build_with_java_8
   displayName: 'Build with Java 8'
-  pool:
-    name: default 
   variables:
     JAVA_HOME: '/usr/lib/jvm/java-8-openjdk-amd64'
     MAVEN_HOME: '/usr/share/maven'
