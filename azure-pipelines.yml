@@ -1,5 +1,5 @@
 trigger:
-  - master
+- master
 
 jobs:
 - job: build_with_java_8
@@ -8,7 +8,8 @@ jobs:
     name: default 
   variables:
     JAVA_HOME: '/usr/lib/jvm/java-8-openjdk-amd64'
-    PATH: '$(JAVA_HOME)/bin:$(PATH)'
+    MAVEN_HOME: '/usr/share/maven'
+    PATH: '$(JAVA_HOME)/bin:$(MAVEN_HOME)/bin:$(PATH)'
   steps:
     - task: Maven@3
       inputs:
@@ -16,4 +17,3 @@ jobs:
         goals: 'package'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
- 
