@@ -1,13 +1,20 @@
+---
 trigger:
   - master
-pool:
-  name: default
+
 jobs:
-  - job: buildjob
-    displayName: bulding game of life
-    steps:
-      - script: |
-          export PATH="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin:$PATH"
-          export PATH="/opt/maven3.9/bin:$PATH" 
-          mvn clean package
-        displayName: check maven and java version   
+- job: buildjob
+  displayName: 'maven building and packaging'
+  pool: 
+    name: default
+  variables:
+    PATH: "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin:/usr/share/maven/bin:$PATH"
+  steps:
+  - task: Maven@3
+    inputs:
+      mavenPOMFile: 'pom.xml'
+      goals: 'package'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
