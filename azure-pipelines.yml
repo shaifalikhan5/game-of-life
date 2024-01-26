@@ -7,7 +7,7 @@ jobs:
     displayName: bulding game of life
     steps:
       - script: |
-          export PATH="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java:$PATH"
+          export PATH="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin:$PATH"
           export PATH="/opt/maven3.9/bin:$PATH" 
           mvn -v
         displayName: check maven and java version   
