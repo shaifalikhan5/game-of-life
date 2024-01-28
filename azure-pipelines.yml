@@ -1,7 +1,7 @@
 trigger:
   - master
 pool:
-  name: default
+  name: strongpool
 jobs:
 - job: job1
   displayName: buid game of life
