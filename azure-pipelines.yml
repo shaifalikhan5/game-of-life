@@ -3,7 +3,7 @@ trigger:
 pool:
   name: default
 jobs:
-- job: "job 1"
+- job: job1
   displayName: buid game of life
   steps: 
     - task: Maven@3
