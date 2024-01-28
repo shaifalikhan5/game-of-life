@@ -1,20 +1,28 @@
----
 trigger:
   - master
-
+pool:
+  name: default
 jobs:
-- job: buildjob
-  displayName: 'maven building and packaging'
-  pool: 
-    name: default
-  variables:
-    PATH: "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin:/usr/share/maven/bin:$PATH"
-  steps:
-  - task: Maven@3
-    inputs:
-      mavenPOMFile: 'pom.xml'
-      goals: 'package'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.8'
+- job: "job 1"
+  displayName: buid game of life
+  steps: 
+    - task: Maven@3
+      inputs:
+        mavenPOMFile: 'pom.xml'
+        goals: 'package'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'path'
+        jdkVersionOption: '1.8'
+        jdkDirectory:  '/usr/lib/jvm/java-8-openjdk-amd64/'
+        mavenVersionOption: 'path'
+        mavenDirectory: '/usr/share/maven'
+    - task: CopyFiles@2
+      inputs:
+        Contents: "**/target/gameoflife.war" 
+        TargetFolder: $(build.artifactstagingdirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: gameoflifeartifact
+       
